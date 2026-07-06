@@ -25,7 +25,9 @@ app.use("/api/users", userRoute);
 app.use("/api/questions", questionRoute);
 app.use("/api/answers", answerRoute);
 
-
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
 
 async function start() {
   try {
