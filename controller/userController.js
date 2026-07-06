@@ -100,20 +100,20 @@ async function login(req, res) {
     }
     const username = user.username;
     const user_id = user.user_id;
-    
+
     const token = jwt.sign(
       { user_id: user.user_id, username: user.username },
       process.env.JWT_SECRET,
       { expiresIn: "1d" },
     );
 
-    res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.OK).json({
       message: "Login users sucessfully",
       token,
     });
   } catch (error) {
     console.log("LOGIN ERROR", error);
-    res.status(500).json({
+    return res.status(500).json({
       error: "Server Error",
       message: error.message,
     });
