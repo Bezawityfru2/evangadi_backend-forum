@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express").Router();
 const router = express.Router();
 
 // === user controllers ===
