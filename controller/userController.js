@@ -73,12 +73,10 @@ async function login(req, res) {
   }
 
   // Check which database you're connected to
-  console.log("Current database:", db);
   const [count] = await dbConnection.query(
     "SELECT COUNT(*) AS  total FROM users",
   );
   console.log("Total users:", count);
-
   try {
     // ===find user by username or email
     const [allUsers] = await dbConnection.query(
