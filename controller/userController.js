@@ -73,17 +73,21 @@ async function login(req, res) {
   }
 
   // Check which database you're connected to
-  const [db] = await dbConnection.query("SELECT DATABASE() AS db");
   console.log("Current database:", db);
+  const [count] = await dbConnection.query(
+    "SELECT COUNT(*) AS  total FROM users",
+  );
+  console.log("Total users:", count);
 
   try {
     // ===find user by username or email
-    const [users] = await dbConnection.query(
-      "SELECT * FROM users WHERE email = ?",
-      [email],
+    const [allUsers] = await dbConnection.query(
+      "SELECT user_id, username, email FROM users",
+      // "SELECT * FROM users WHERE email = ?",
+      // [email],
     );
 
-    console.log("Users found:", users);
+    console.log("All users found:", allUsers);
 
     if (users.length === 0) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
