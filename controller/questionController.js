@@ -1,13 +1,13 @@
+const dbConnection = require("../db/dbconfig");
 const { StatusCodes } = require("http-status-codes");
 
-const dbConnection = require("../db/dbconfig");
+onsole.log("dbConnection:", dbConnection);
+console.log("Has query:", typeof dbConnection.query);
 
 // ==Post a new question ==
 async function postQuestion(req, res) {
   const { title, description, tag } = req.body;
   const user_id = req.user.user_id;
-
-  const [db] = await dbConnection.query("SELECT DATABASE() AS db");
 
   console.log(req.body);
   console.log(req.user);
@@ -19,6 +19,9 @@ async function postQuestion(req, res) {
     });
   }
   try {
+    const [db] = await dbConnection.query("SELECT DATABASE() AS db");
+    console.log(db);
+
     const [result] = await dbConnection.query(
       "INSERT INTO questions (user_id, title, description, tag) VALUES (?, ?, ?, ?)",
       [user_id, title, description, tag],
