@@ -87,13 +87,13 @@ async function login(req, res) {
 
     console.log("All users found:", allUsers);
 
-    if (users.length === 0) {
+    if (allUsers.length === 0) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         message: "Invalids email or password",
       });
     }
 
-    const user = users[0];
+    const user = allUsers[0];
 
     console.log("User from DB:", user);
     console.log("Entered password:", password);
