@@ -42,7 +42,13 @@ async function register(req, res) {
       "INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
       [username, first_name, last_name, email, hashedPassword],
     );
+
     console.log("Insert result:", result);
+
+    const [allUsers] = await dbConnection.query("SELECT email FROM users");
+
+    console.log("All users:", allUsers);
+
     return res.status(StatusCodes.CREATED).json({
       message: "user register sucessfully",
     });
@@ -54,7 +60,6 @@ async function register(req, res) {
     });
   }
 }
-
 //   ===== Login =====
 async function login(req, res) {
   const { email, password } = req.body;
@@ -66,8 +71,11 @@ async function login(req, res) {
       message: "please provide all password and email",
     });
   }
-  console.log("About to query database...");
-  console.log("Email:", email);
+
+  // Check which database you're connected to
+  const [db] = await dbConnection.query("SELECT DATABASE() AS db");
+  console.log("Current database:", db);
+
   try {
     // ===find user by username or email
     const [users] = await dbConnection.query(
@@ -75,7 +83,7 @@ async function login(req, res) {
       [email],
     );
 
-    console.log(users);
+    console.log("Users found:", users);
 
     if (users.length === 0) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
