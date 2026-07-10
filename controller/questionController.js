@@ -41,8 +41,6 @@ async function postQuestion(req, res) {
 async function getAllQuestion(req, res) {
   const { limit = 10, offset = 0 } = req.query;
 
-  console.log("Error in getAllQuestions:", error);
-
   try {
     const [questions] = await dbConnection.query(
       `SELECT q.question_id, q.title, q.description, q.tag, q.created_at, u.username
@@ -52,9 +50,11 @@ async function getAllQuestion(req, res) {
              LIMIT ? OFFSET ?`,
       [parseInt(limit), parseInt(offset)],
     );
+
     res.status(StatusCodes.OK).json({ questions });
   } catch (error) {
     console.log("Error in getAllQuestions:", error);
+
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errror: "Internal Server errors",
       message: "An unexpected error occurred",
