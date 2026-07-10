@@ -1,7 +1,7 @@
 const dbConnection = require("../db/dbconfig");
 const { StatusCodes } = require("http-status-codes");
 
-onsole.log("dbConnection:", dbConnection);
+console.log("dbConnection:", dbConnection);
 console.log("Has query:", typeof dbConnection.query);
 
 // ==Post a new question ==
