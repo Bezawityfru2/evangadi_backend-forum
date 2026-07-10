@@ -1,17 +1,14 @@
 const dbConnection = require("../db/dbconfig");
 const { StatusCodes } = require("http-status-codes");
 
-console.log("dbConnection:", dbConnection);
 console.log("Has query:", typeof dbConnection.query);
 
 // ==Post a new question ==
 async function postQuestion(req, res) {
   const { title, description, tag } = req.body;
   const user_id = req.user.user_id;
-
   console.log(req.body);
   console.log(req.user);
-
   if (!title || !description) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       error: "Bad request",
@@ -43,6 +40,8 @@ async function postQuestion(req, res) {
 // === GET all question =====
 async function getAllQuestion(req, res) {
   const { limit = 10, offset = 0 } = req.query;
+
+  console.log("Error in getAllQuestions:", error);
 
   try {
     const [questions] = await dbConnection.query(
