@@ -45,9 +45,9 @@ async function register(req, res) {
 
     console.log("Insert result:", result);
 
-    const [users] = await dbConnection.query("SELECT email FROM users");
+    // const [users] = await dbConnection.query("SELECT email FROM users");
 
-    console.log("All users:", users);
+    // console.log("All users:", users);
 
     return res.status(StatusCodes.CREATED).json({
       message: "user register sucessfully",
