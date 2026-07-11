@@ -79,21 +79,20 @@ async function login(req, res) {
   console.log("Total users:", count);
   try {
     // ===find user by username or email
-    const [allUsers] = await dbConnection.query(
-      "SELECT user_id, username, email FROM users",
-      // "SELECT * FROM users WHERE email = ?",
-      // [email],
+    const [users] = await dbConnection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
     );
 
-    console.log("All users found:", allUsers);
+    console.log("Users found:", users);
 
-    if (allUsers.length === 0) {
+    if (users.length === 0) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         message: "Invalids email or password",
       });
     }
 
-    const user = allUsers[0];
+    const user = users[0];
 
     console.log("User from DB:", user);
     console.log("Entered password:", password);
