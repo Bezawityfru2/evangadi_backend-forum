@@ -42,8 +42,10 @@ async function register(req, res) {
       "INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
       [username, first_name, last_name, email, hashedPassword],
     );
-
     console.log("Insert result:", result);
+
+    const [table] = await dbConnection.query("SHOW CREATE TABLE users");
+    console.log(table[0]["Create Table"]);
 
     // const [users] = await dbConnection.query("SELECT email FROM users");
 
@@ -81,7 +83,7 @@ async function login(req, res) {
     // ===find user by username or email
     const [users] = await dbConnection.query(
       "SELECT * FROM users WHERE email = ?",
-      [email]
+      [email],
     );
 
     console.log("Users found:", users);
