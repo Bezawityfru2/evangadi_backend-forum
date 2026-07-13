@@ -37,19 +37,15 @@ async function register(req, res) {
     //  ==== hash passwords
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const [table] = await dbConnection.query("SHOW CREATE TABLE users");
+    console.log(table[0]["Create Table"]);
+
     // == insrt new user
     const [result] = await dbConnection.query(
       "INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
       [username, first_name, last_name, email, hashedPassword],
     );
     console.log("Insert result:", result);
-
-    const [table] = await dbConnection.query("SHOW CREATE TABLE users");
-    console.log(table[0]["Create Table"]);
-
-    // const [users] = await dbConnection.query("SELECT email FROM users");
-
-    // console.log("All users:", users);
 
     return res.status(StatusCodes.CREATED).json({
       message: "user register sucessfully",
