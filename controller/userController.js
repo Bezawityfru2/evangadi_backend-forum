@@ -38,7 +38,7 @@ async function register(req, res) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const [rows] = await dbConnection.query("SHOW CREATE TABLE users");
-    console.log(table[0]["Create Table"]);
+    console.log(rows[0]["Create Table"]);
 
     // == insrt new user
     const [result] = await dbConnection.query(
