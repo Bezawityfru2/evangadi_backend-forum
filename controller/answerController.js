@@ -34,8 +34,8 @@ async function postAnswer(req, res) {
       });
     }
     const [result] = await dbConnection.query(
-      "INSERT INTO answers (user_id, question_id, content) VALUES (?, ?, ?)",
-      [user_id, question_id, content],
+      `INSERT INTO answers (question_id, user_id content, created_at) VALUES (?, ?, ?, NOW())`,
+      [question_id, user_id, content],
     );
     res.status(StatusCodes.CREATED).json({
       message: "Answer posted successfully",
