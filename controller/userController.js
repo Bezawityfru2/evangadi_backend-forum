@@ -42,7 +42,7 @@ async function register(req, res) {
 
     // == insrt new user
     const [result] = await dbConnection.query(
-      "INSERT INTO users (username, first_name, las_tname, email, password) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
       [username, first_name, last_name, email, hashedPassword],
     );
     console.log("Insert result:", result);
