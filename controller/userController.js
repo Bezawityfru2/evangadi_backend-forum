@@ -132,10 +132,10 @@ async function checkUser(req, res) {
   //   const username
   const { user_id } = req.user;
 
-  // const [users] = await dbConnection.query(
-  //   "SELECT username, email FROM users WHERE user_id = ?",
-  //   [user_id],
-  // );
+  const [users] = await dbConnection.query(
+    "SELECT username, email FROM users WHERE user_id = ?",
+    [user_id],
+  );
   if (users.length === 0) {
     return res.status(404).json({
       message: "User not founds",
