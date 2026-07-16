@@ -16,8 +16,8 @@ async function postQuestion(req, res) {
     });
   }
   try {
-    const [db] = await dbConnection.query("SELECT DATABASE() AS db");
-    console.log(db);
+    const [tables] = await dbConnection.query("SHOW CREATE TABLE questions");
+    console.log(tables);
 
     const [result] = await dbConnection.query(
       `INSERT INTO questions (user_id, title, description, tag) VALUES (?, ?, ?, ?)`,
