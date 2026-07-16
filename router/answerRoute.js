@@ -12,6 +12,6 @@ const {
 router.post("/", authMiddleware, postAnswer);
 
 // ===get answer for a question
-router.get("/:questionId", getAnswerForQuestion);
+router.get("/:question_id", getAnswerForQuestion);
 
 module.exports = router;

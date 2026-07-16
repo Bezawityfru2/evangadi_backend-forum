@@ -51,10 +51,10 @@ async function postAnswer(req, res) {
 
 // get answer for question
 async function getAnswerForQuestion(req, res) {
-  const questionId = req.params;
+  const question_id = req.params;
 
   console.log("req.params:", req.params);
-  console.log("questionId:", req.params.question_id);
+  console.log("question_id:", question_id);
 
   try {
     // fetch question first
@@ -64,7 +64,7 @@ async function getAnswerForQuestion(req, res) {
     );
     console.log("question_id:", question_id);
 
-    if (!questions || questions.length === 0) {
+    if (questions.length === 0) {
       return res.status(StatusCodes.NOT_FOUND).json({
         error: "Not found",
         message: "Question not found",
@@ -79,6 +79,7 @@ async function getAnswerForQuestion(req, res) {
             ORDER BY a.created_at ASC`,
       [question_id],
     );
+
     res.status(StatusCodes.OK).json({ answers });
   } catch (error) {
     console.log("Error in getAnswerForQuestion:", error);
