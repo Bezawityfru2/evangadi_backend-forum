@@ -51,16 +51,16 @@ async function postAnswer(req, res) {
 
 // get answer for question
 async function getAnswerForQuestion(req, res) {
-  const question_id = req.params.questionId;
+  const questionId = req.params;
 
   console.log("req.params:", req.params);
-  console.log("questionId:", req.params.questionId);
+  console.log("questionId:", req.params.question_id);
 
   try {
     // fetch question first
     const [questions] = await dbConnection.query(
-      "SELECT * FROM questions  WHERE question_id =?",
-      [questionId],
+      "SELECT * FROM questions  WHERE question_id = ?",
+      [question_id],
     );
     console.log("question_id:", question_id);
 

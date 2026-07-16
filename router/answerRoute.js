@@ -5,13 +5,13 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const {
   postAnswer,
-  getAnswerForQuestion
+  getAnswerForQuestion,
 } = require("../controller/answerController");
 
 // == post answer
-router.post("/",  authMiddleware, postAnswer);
+router.post("/", authMiddleware, postAnswer);
 
 // ===get answer for a question
-router.get("/:question_id", getAnswerForQuestion);
+router.get("/:questionId", getAnswerForQuestion);
 
 module.exports = router;
