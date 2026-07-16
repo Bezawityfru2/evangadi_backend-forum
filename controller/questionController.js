@@ -20,7 +20,7 @@ async function postQuestion(req, res) {
     console.log(db);
 
     const [result] = await dbConnection.query(
-      `INSERT INTO questions (user_id, title, description, tag, created_at) VALUES (?, ?, ?, ?, NOW())`,
+      `INSERT INTO questions (user_id, title, description, tag) VALUES (?, ?, ?, ?, NOW())`,
       [user_id, title, description, tag],
     );
     console.log("Questions insert result:", result);
