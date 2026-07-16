@@ -34,7 +34,7 @@ async function postAnswer(req, res) {
       });
     }
     const [result] = await dbConnection.query(
-      `INSERT INTO answers (question_id, user_id content, created_at) VALUES (?, ?, ?, NOW())`,
+      `INSERT INTO answers (question_id, user_id, content, created_at) VALUES (?, ?, ?, NOW())`,
       [question_id, user_id, content],
     );
     res.status(StatusCodes.CREATED).json({
