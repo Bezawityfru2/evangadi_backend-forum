@@ -51,7 +51,7 @@ async function postAnswer(req, res) {
 
 // get answer for question
 async function getAnswerForQuestion(req, res) {
-  const question_id = req.params;
+  const { question_id } = req.params;
 
   console.log("req.params:", req.params);
   console.log("question_id:", question_id);
